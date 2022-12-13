@@ -1,0 +1,8 @@
+[2020-03-21 15:10:49]: Building file listing for depot 363890 ...
+[2020-03-21 15:10:49]: Found 1006 files for mapping: E:\Dropbox\Psychronic\Game Designs\RPG Maker MV\Galacti-Chrons Sci-Fi Warehouse Pack * -> .
+[2020-03-21 15:10:49]: Found 1006 files (172 MB) for depot 363890
+[2020-03-21 15:10:50]: Building depot 363890, baseline manifest 2291912514076414417 (1003 files)
+[2020-03-21 15:10:50]: Found 929 chunks ( 927 used previously ) for depot 363890, took 0 minutes, 0 seconds
+
+[2020-03-21 15:10:50]: ERROR! Failed to find all chunks for E:\Dropbox\Psychronic\Game Designs\RPG Maker MV\Galacti-Chrons Sci-Fi Warehouse Pack\img\tilesets\workshopbuilds\depot_build_363890.log (374/66, flags 0)
+[2020-03-21 15:10:50]: ERROR! Failed building depots chunks

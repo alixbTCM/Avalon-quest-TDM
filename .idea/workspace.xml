@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="154804f8-a4f2-45a9-bced-0b7f3f631b1f" name="Changes" comment="tdm fix" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="25ButK0han6Dbo4PVyy3uhYkkPO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/alb/Documents/ProjetsTCM/woka-lyon2021/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projets\woka-lyon2021\maps" />
+      <recent name="C:\Projets\woka-lyon2021" />
+      <recent name="C:\Projets\woka-lyon2021\scripts" />
+      <recent name="C:\Projets\woka-lyon2021\src\assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projets\woka-lyon2021" />
+      <recent name="C:\Projets\woka-lyon2021\maps" />
+      <recent name="C:\Projets\woka-lyon2021\scripts" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="154804f8-a4f2-45a9-bced-0b7f3f631b1f" name="Changes" comment="" />
+      <created>1645013014200</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645013014200</updated>
+      <workItem from="1645013016460" duration="1633000" />
+      <workItem from="1645442507290" duration="657000" />
+      <workItem from="1655290548610" duration="668000" />
+      <workItem from="1655390606590" duration="804000" />
+      <workItem from="1655473587359" duration="594000" />
+      <workItem from="1655811513263" duration="895000" />
+      <workItem from="1655814778608" duration="9422000" />
+      <workItem from="1655880984743" duration="54988000" />
+      <workItem from="1659524919969" duration="2610000" />
+      <workItem from="1662458871447" duration="5259000" />
+      <workItem from="1668789930136" duration="1670000" />
+      <workItem from="1669018270621" duration="18000" />
+      <workItem from="1669023832013" duration="3754000" />
+      <workItem from="1669049437712" duration="1352000" />
+      <workItem from="1669633827611" duration="8750000" />
+      <workItem from="1670257785713" duration="721000" />
+    </task>
+    <task id="LOCAL-00001" summary="water test setup">
+      <created>1655888865291</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1655888865291</updated>
+    </task>
+    <task id="LOCAL-00002" summary="water test continue">
+      <created>1656060101036</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1656060101037</updated>
+    </task>
+    <task id="LOCAL-00003" summary="water test + racing test">
+      <created>1656414965921</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1656414965922</updated>
+    </task>
+    <task id="LOCAL-00004" summary="merge master">
+      <created>1656415616525</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1656415616525</updated>
+    </task>
+    <task id="LOCAL-00005" summary="tuto setup">
+      <created>1656430217302</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1656430217302</updated>
+    </task>
+    <task id="LOCAL-00006" summary="attack test setup">
+      <created>1659525461719</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659525461719</updated>
+    </task>
+    <task id="LOCAL-00007" summary="pull master">
+      <created>1659526008326</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659526008326</updated>
+    </task>
+    <task id="LOCAL-00008" summary="merge master">
+      <created>1662708201518</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1662708201518</updated>
+    </task>
+    <task id="LOCAL-00009" summary="attack test exit">
+      <created>1662709343032</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1662709343032</updated>
+    </task>
+    <task id="LOCAL-00010" summary="water test fix">
+      <created>1662711494632</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1662711494632</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add sound">
+      <created>1662719583530</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1662719583530</updated>
+    </task>
+    <task id="LOCAL-00012" summary="change redirection">
+      <created>1668791064129</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668791064129</updated>
+    </task>
+    <task id="LOCAL-00013" summary="rechange redirection">
+      <created>1668791492701</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668791492701</updated>
+    </task>
+    <task id="LOCAL-00014" summary="tdm fix">
+      <created>1670237723767</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1670237723767</updated>
+    </task>
+    <task id="LOCAL-00015" summary="tdm fix">
+      <created>1670257988141</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1670257988141</updated>
+    </task>
+    <task id="LOCAL-00016" summary="tdm fix">
+      <created>1670259589982</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1670259589982</updated>
+    </task>
+    <task id="LOCAL-00017" summary="tdm fix">
+      <created>1670259888992</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1670259888992</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="water test setup" />
+    <MESSAGE value="water test continue" />
+    <MESSAGE value="water test + racing test" />
+    <MESSAGE value="tuto setup" />
+    <MESSAGE value="attack test setup" />
+    <MESSAGE value="pull master" />
+    <MESSAGE value="merge master" />
+    <MESSAGE value="attack test exit" />
+    <MESSAGE value="water test fix" />
+    <MESSAGE value="add sound" />
+    <MESSAGE value="change redirection" />
+    <MESSAGE value="rechange redirection" />
+    <MESSAGE value="tdm fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="tdm fix" />
+  </component>
+</project>

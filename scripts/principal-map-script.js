@@ -1,5 +1,6 @@
 import { } from "https://unpkg.com/@workadventure/scripting-api-extra@^1";
 import {
+    translate,
     toggleLayersVisibility,
     triggerAnimationWithLayers,
     getSentenceWithVariables,
@@ -7,7 +8,6 @@ import {
     selectRandomItemInArray
 } from './utils.js'
 import { principalMapLayers } from './constants/maps-layers.js'
-import {principalMapDialogs, dialogUtils, finalMapDalogs} from './constants/maps-dialogs.js'
 import { oldManName, ladyOfTheLakeName, myselfName, omnipotentCharacter} from './constants/character-names.js';
 import { principalMapAnimationLayers } from './constants/maps-animation-layers.js'
 import { principalMapChatCommands } from './constants/chat-commands.js'
@@ -82,18 +82,25 @@ let waitingForPloufPlouf = false
 const ploufPlouf = (dialog, roomId = null) => {
     randomPlayersList = [] // Reset players list
     waitingForPloufPlouf = true
-    sendMessageToAllPlayers(principalMapDialogs.ploufPlouf[dialog].sentence, omnipotentCharacter, roomId);
+    sendMessageToAllPlayers(
+        translate(`principalMap.ploufPlouf.${dialog}.sentence`),
+        omnipotentCharacter,
+        roomId
+    )
     WA.state['roomId'] = roomId
     WA.state['selectRandomPlayer'] = true
     setTimeout(() => {
         randomPlayersList.push(WA.player.name)
         WA.state['roomId'] = null
         WA.state['selectRandomPlayer'] = false
-        sendMessageToAllPlayers(getSentenceWithVariables(
-            principalMapDialogs.ploufPlouf[dialog].selected,
-            {
-            name: selectRandomItemInArray(randomPlayersList)
-        }), omnipotentCharacter, roomId)
+        sendMessageToAllPlayers(
+            translate(
+                `principalMap.ploufPlouf.${dialog}.selected`,
+                {name: selectRandomItemInArray(randomPlayersList)}
+            ),
+            omnipotentCharacter,
+            roomId
+        )
         WA.state['addNameToRandomPlayerList'] = ''
         waitingForPloufPlouf = false
         randomPlayersList = []
@@ -122,8 +129,8 @@ let triggerPotatoPloufPloufMessage
 let triggerMoneyPloufPloufMessage
 WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufBoat').subscribe(() => {
     triggerBoatPloufPloufMessage = WA.ui.displayActionMessage({
-        message: getSentenceWithVariables(dialogUtils.executeAction, {
-            action: principalMapDialogs.ploufPlouf.boat.action
+        message: translate('utils.executeAction', {
+            action: translate('principalMap.ploufPlouf.boat.action')
         }),
         callback: () => {
             ploufPlouf('boat', 'blackPearl')
@@ -133,8 +140,8 @@ WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufBoat').subscribe(() => {
 
 WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufPotato').subscribe(() => {
     triggerPotatoPloufPloufMessage = WA.ui.displayActionMessage({
-        message: getSentenceWithVariables(dialogUtils.executeAction, {
-            action: principalMapDialogs.ploufPlouf.potato.action
+        message: translate('utils.executeAction', {
+            action: translate('principalMap.ploufPlouf.potato.action')
         }),
         callback: () => {
             ploufPlouf('potato','place')
@@ -144,8 +151,8 @@ WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufPotato').subscribe(() => {
 
 WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufMoney').subscribe(() => {
     triggerMoneyPloufPloufMessage = WA.ui.displayActionMessage({
-        message: getSentenceWithVariables(dialogUtils.executeAction, {
-            action: principalMapDialogs.ploufPlouf.money.action
+        message: translate('utils.executeAction', {
+            action: translate('principalMap.ploufPlouf.money.action')
         }),
         callback: () => {
             ploufPlouf('money', 'docks')
@@ -169,23 +176,25 @@ WA.room.onLeaveLayer('zonesPloufPlouf/ploufPloufPotato').subscribe(() => {
 // Old man
 let oldManCounter = 0
 let triggerOldManMessage;
+const firstTalkMonologue = ['principalMap.oldMan.firstTalk.force_balance', 'principalMap.oldMan.firstTalk.mistake', 'principalMap.oldMan.firstTalk.cough', 'principalMap.oldMan.firstTalk.hello', 'principalMap.oldMan.firstTalk.oldStory', 'principalMap.oldMan.firstTalk.fearOfSharks', 'principalMap.oldMan.firstTalk.goodLuck']
+const statueAdmirations = ['principalMap.oldMan.admirations.beautifulStatue', 'principalMap.oldMan.admirations.expresionism', 'principalMap.oldMan.admirations.capitalism', 'principalMap.oldMan.admirations.remindMeSomething']
 WA.room.onEnterLayer('OldManZone').subscribe(() => {
     triggerOldManMessage = WA.ui.displayActionMessage({
-        message: WA.state['showOldMan'] ? getSentenceWithVariables(dialogUtils.executeAction, {
-            action: principalMapDialogs.oldMan.actions.ghost
-        }) : getSentenceWithVariables(dialogUtils.executeAction, {
-            action: principalMapDialogs.oldMan.actions.stone
+        message: WA.state['showOldMan'] ? translate('utils.executeAction', {
+            action: translate('principalMap.oldMan.actions.ghost')
+        }) : translate('utils.executeAction', {
+            action: translate('principalMap.oldMan.actions.stone')
         }),
         callback: () => {
             if (WA.state['showOldMan'] ) {
                 oldManCounter++
                 if (oldManCounter === 1) {
-                    monologue(principalMapDialogs.oldMan.firstTalk, oldManName)
+                    monologue(firstTalkMonologue, oldManName)
                     WA.room.setTiles([{x: 27, y: 22, tile: null, layer: 'BlockingSharks'}])
                 } else {
                     WA.chat.sendChatMessage(
-                        getSentenceWithVariables(
-                            principalMapDialogs.oldMan.secondTalk,
+                        translate(
+                            'principalMap.oldMan.secondTalk',
                             {name: WA.player.name}
                         ),
                         oldManName
@@ -193,7 +202,7 @@ WA.room.onEnterLayer('OldManZone').subscribe(() => {
                 }
             }
             else {
-                WA.chat.sendChatMessage(selectRandomItemInArray(principalMapDialogs.oldMan.admirations), myselfName)
+                WA.chat.sendChatMessage(translate(selectRandomItemInArray(statueAdmirations)), myselfName)
             }
         }
     });
@@ -206,7 +215,7 @@ WA.room.onLeaveLayer('OldManZone').subscribe(() => {
 WA.state.onVariableChange('showOldMan').subscribe((value) => {
     if (value) {
         toggleLayersVisibility("OldManStone", false)
-        WA.chat.sendChatMessage(principalMapDialogs.oldMan.appearing, ladyOfTheLakeName);
+        WA.chat.sendChatMessage(translate('principalMap.oldMan.appearing'), ladyOfTheLakeName);
 
         triggerAnimationWithLayers(principalMapAnimationLayers.pouf)
     }
@@ -217,8 +226,8 @@ WA.state.onVariableChange('showOldMan').subscribe((value) => {
 let triggerCanonAction
 WA.room.onEnterLayer('Canon1Zone').subscribe(() => {
     triggerCanonAction = WA.ui.displayActionMessage({
-        message: getSentenceWithVariables(dialogUtils.executeAction, {
-            action: dialogUtils.shoot
+        message: translate('utils.executeAction', {
+            action: translate('utils.shoot')
         }),
         callback: () => {
             WA.state['shootingCanon1'] = true
@@ -235,8 +244,8 @@ WA.room.onLeaveLayer('Canon1Zone').subscribe(() => {
 
 WA.room.onEnterLayer('Canon2Zone').subscribe(() => {
     triggerCanonAction = WA.ui.displayActionMessage({
-        message: getSentenceWithVariables(dialogUtils.executeAction, {
-            action: dialogUtils.shoot
+        message: translate('utils.executeAction', {
+            action: translate('utils.shoot')
         }),
         callback: () => {
             WA.state['shootingCanon2'] = true
@@ -288,13 +297,15 @@ WA.room.onLeaveLayer("cavernZone").subscribe(() => {
 });
 
 // Lady of the lake
+const ladyOfTheLakeFirstTalk = ['principalMap.ladyOfTheLake.firstTalk.stop', 'principalMap.ladyOfTheLake.firstTalk.notWorthy', 'principalMap.ladyOfTheLake.firstTalk.avalonDanger']
+const ladyOfTheLakeRandomSentence = ['principalMap.ladyOfTheLake.randomSentence.youShallNotPass', 'principalMap.ladyOfTheLake.randomSentence.avalonIsTheKey', 'principalMap.ladyOfTheLake.randomSentence.talkToOldMan', 'principalMap.ladyOfTheLake.randomSentence.findAvalon']
 WA.room.onEnterLayer("ladyOfTheLakeZone").subscribe(() => {
     if (LadyCounter === 0) {
-        monologue(principalMapDialogs.ladyOfTheLake.firstTalk, ladyOfTheLakeName)
+        monologue(ladyOfTheLakeFirstTalk, ladyOfTheLakeName)
     } else {
         WA.chat.sendChatMessage(
-            getSentenceWithVariables(
-                selectRandomItemInArray(principalMapDialogs.ladyOfTheLake.randomSentence), {name: WA.player.name}
+            translate(
+                selectRandomItemInArray(ladyOfTheLakeRandomSentence), {name: WA.player.name}
             ), ladyOfTheLakeName
         )
     }
@@ -310,12 +321,11 @@ let waitingForPLayersInRoom
 let playersInRooms = []
 const getPlayersInRooms = () => {
     if (WA.state['knowPeopleInRooms']) {
-        WA.chat.sendChatMessage(principalMapDialogs.getPlayersInRooms.impossible, omnipotentCharacter)
+        WA.chat.sendChatMessage(translate('principalMap.getPlayersInRooms.impossible'), omnipotentCharacter)
     } else {
         WA.state['knowPeopleInRooms'] = true
         waitingForPLayersInRoom = true
         setTimeout(() => {
-            console.log(roomId)
             if (roomId !== null) {
                 playersInRooms[roomId] = playersInRooms[roomId] ? playersInRooms[roomId] + 1 : 1
             }
@@ -324,7 +334,7 @@ const getPlayersInRooms = () => {
 
             for (let i = 0; i<mapRoomsKeys.length; i++) {
                 const mapRoomIndex = mapRoomsKeys[i]
-                const sentence = getSentenceWithVariables(principalMapDialogs.getPlayersInRooms.room, {
+                const sentence = translate('principalMap.getPlayersInRooms.room', {
                     room: mapRooms[mapRoomIndex].name,
                     nombre: (playersInRooms[mapRooms[mapRoomIndex].id] ? playersInRooms[mapRooms[mapRoomIndex].id] : 0)
                 })
@@ -363,11 +373,11 @@ const unlockAvalon = () => {
     }
 }
 
-// Commandes du chat
+// Commandes du chat // TODO : optimize
 const chatCommands = {
     [principalMapChatCommands.randomPlayerInMapCommand]: () => ploufPlouf('global'),
     [principalMapChatCommands.playersInRoomsCommand]: () => getPlayersInRooms(),
-    [principalMapChatCommands.avalonUnlockingCommand]: () => unlockAvalon(),
+    /*[principalMapChatCommands.avalonUnlockingCommand]: () => unlockAvalon(),*/
 }
 
 // Listening to chat commands
@@ -385,19 +395,31 @@ WA.chat.onChatMessage((message) => {
 const pannels = {
     "PannelsZones/DisplayPannelZone": {
         object: "displayPannelPopup",
-        content: "Commandes du chat : \"" + chatCommandsKeys.join('", "') + '"'
+        translation: {
+            key: 'principalMap.pannels.chatCommands',
+            variables:{ commands : '"' + chatCommandsKeys.join('", "') + '"'}
+        },
     },
     "PannelsZones/ParisPannelZone": {
         object: "parisPannelPopup",
-        content: "Vers Paris"
+        translation: {
+            key: 'principalMap.pannels.toParis',
+            variables:{}
+        },
     },
     "PannelsZones/AlicePannelZone": {
         object: "alicePannelPopup",
-        content: "Terrier du lapin"
+        translation: {
+            key: 'principalMap.pannels.rabbitHole',
+            variables:{}
+        },
     },
     "PannelsZones/CavernPannelZone":  {
         object: "cavernPannelPopup",
-        content: "Salle du trône"
+        translation: {
+            key: 'principalMap.pannels.throneRoom',
+            variables:{}
+        },
     },
 }
 
@@ -407,11 +429,11 @@ for (let i = 0; i < pannelsKeys.length; i++) {
     let currentPopup
     WA.room.onEnterLayer(pannelsKeys[i]).subscribe(() => {
         actionMessage = WA.ui.displayActionMessage({
-            message: getSentenceWithVariables(dialogUtils.executeAction, {
-                action: dialogUtils.see
+            message: translate('utils.executeAction', {
+                action: translate('utils.see')
             }),
             callback: () => {
-                currentPopup = WA.ui.openPopup(pannels[pannelsKeys[i]].object, pannels[pannelsKeys[i]].content, [{
+                currentPopup = WA.ui.openPopup(pannels[pannelsKeys[i]].object, translate(pannels[pannelsKeys[i]].translation.key, pannels[pannelsKeys[i]].translation.variables), [{
                     label: "OK",
                     callback: (popup) => {
                         // Close the popup when the "Close" button is pressed.
@@ -436,23 +458,22 @@ for (let i = 0; i < pannelsKeys.length; i++) {
 // Sortie vers Paris
 let parisPopup
 WA.room.onEnterLayer('toParis').subscribe(() => {
-    console.log('Vers paris')
-    parisPopup = WA.ui.openPopup('parisPopup', 'Où souhaitez-vous vous rendre ?', [{
-        label: "Rez-de-chaussée",
+    parisPopup = WA.ui.openPopup('parisPopup', translate('principalMap.paris.whereToGo'), [{
+        label: translate('principalMap.paris.floor0'),
         callback: (popup) => {
             // Redirection vers Paris RDC
             WA.nav.goToRoom('/@/tcm/workadventure/floor0#start-tcm')
         }
     },
         {
-            label: "Étage 1",
+            label: translate('principalMap.paris.floor1'),
             callback: (popup) => {
                 // Redirection vers Paris Étage 1
                 WA.nav.goToRoom('/@/tcm/workadventure/floor1#from-floor0')
             }
         },
         {
-            label: "Étage 2",
+            label: translate('principalMap.paris.floor2'),
             callback: (popup) => {
                 // Redirection vers Paris Étage 2
                 WA.nav.goToRoom('/@/tcm/workadventure/floor2#from-floor1-east')

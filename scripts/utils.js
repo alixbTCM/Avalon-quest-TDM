@@ -1,3 +1,5 @@
+import { translate } from './constants/translate.js'
+
 const wait = (time) => {
     return new Promise(resolve => {
         setTimeout(resolve, time);
@@ -44,9 +46,10 @@ const getSentenceWithVariables = (message, variables = {}) => {
     return newMessage
 }
 
-const monologue = (messages, author, variables = {}) => {
-    for (let i = 0; i<messages.length; i++) {
-        WA.chat.sendChatMessage(getSentenceWithVariables(messages[i], variables), author)
+const monologue = (translationKeys, author, variables = {}) => {
+    console.log('keys', translationKeys)
+    for (let i = 0; i<translationKeys.length; i++) {
+        WA.chat.sendChatMessage(translate(translationKeys[i], variables), author)
     }
 }
 
@@ -61,5 +64,6 @@ export {
     getSentenceWithVariables,
     monologue,
     selectRandomItemInArray,
-    wait
+    wait,
+    translate
 }

@@ -6,7 +6,6 @@ import { principalMapAnimationLayers } from './constants/maps-animation-layers.j
 import { principalMapChatCommands } from './constants/chat-commands.js'
 
 WA.onInit().then(() => {
-    console.log('INITIATE')
     // Initiate chat
     utils.chat.initChat()
 

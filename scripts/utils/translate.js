@@ -32,11 +32,19 @@ const getSentenceWithVariables = (message, variables = {}) => {
 const translate = (translationKey, variables= {}) => {
     const keys = translationKey.split('.')
     const translation = keys.reduce((acc, item) => {
-        acc = acc[item]
+        if (!acc || !acc[item]) {
+            acc = undefined
+        } else {
+            acc = acc[item]
+        }
+
         return acc
     }, acceptedPlayerLanguages[playerLanguage])
 
-    return getSentenceWithVariables(translation, variables)
+    if (translation) {
+        return (typeof translation === 'string') ?getSentenceWithVariables(translation, variables) : translationKey
+    }
+    return translationKey
 }
 
 export {

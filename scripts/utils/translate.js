@@ -42,7 +42,7 @@ const translate = (translationKey, variables= {}) => {
     }, acceptedPlayerLanguages[playerLanguage])
 
     if (translation) {
-        return (typeof translation === 'string') ?getSentenceWithVariables(translation, variables) : translationKey
+        return (typeof translation === 'string') ? getSentenceWithVariables(translation, variables) : translationKey
     }
     return translationKey
 }

@@ -332,8 +332,8 @@ WA.onInit().then(() => {
                 for (let i = 0; i<mapRoomsKeys.length; i++) {
                     const mapRoomIndex = mapRoomsKeys[i]
                     const sentence = utils.translations.translate('principalMap.getPlayersInRooms.room', {
-                        room: mapRooms[mapRoomIndex].name,
-                        nombre: (playersInRooms[mapRooms[mapRoomIndex].id] ? playersInRooms[mapRooms[mapRoomIndex].id] : 0)
+                        room: utils.translations.translate(`principalMap.roomNames.${mapRooms[mapRoomIndex].id}`),
+                        number: (playersInRooms[mapRooms[mapRoomIndex].id] ? playersInRooms[mapRooms[mapRoomIndex].id] : 0)
                     })
                     WA.chat.sendChatMessage(
                         sentence,

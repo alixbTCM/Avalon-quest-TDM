@@ -40,5 +40,6 @@ const translate = (translationKey, variables= {}) => {
 }
 
 export {
-    translate
+    translate,
+    getSentenceWithVariables
 }

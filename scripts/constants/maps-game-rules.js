@@ -12,8 +12,8 @@ const escapeMapeGameRules = [
 ]
 
 const waterTestRules = [
-    "Vous avez survécu à votre chute dans l'eau en trouvant in extremis une grotte... Il va falloir réussir à en sortir maintenant... ",
-    "C'est très simple, il vous suffit dans un premier temps de traverser, qu'attendez-vous?"
+    "waterTest.rules.line1",
+    "waterTest.rules.line2"
 ]
 
 const racingTestRules = [

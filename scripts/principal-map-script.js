@@ -166,7 +166,7 @@ WA.onInit().then(() => {
                 if (WA.state['showOldMan'] ) {
                     oldManCounter++
                     if (oldManCounter === 1) {
-                        utils.chat.monologue(firstTalkMonologue, oldManName)
+                        utils.chat.monologue(firstTalkMonologue, utils.translations.translate('characterNames.oldManName'))
                         WA.room.setTiles([{x: 27, y: 22, tile: null, layer: 'BlockingSharks'}])
                     } else {
                         WA.chat.sendChatMessage(
@@ -174,12 +174,12 @@ WA.onInit().then(() => {
                                 'principalMap.oldMan.secondTalk',
                                 {name: WA.player.name}
                             ),
-                            oldManName
+                            utils.translations.translate('characterNames.oldManName')
                         )
                     }
                 }
                 else {
-                    WA.chat.sendChatMessage(utils.translations.translate(utils.main.selectRandomItemInArray(statueAdmirations)), myselfName)
+                    WA.chat.sendChatMessage(utils.translations.translate(utils.main.selectRandomItemInArray(statueAdmirations)), utils.translations.translate('characterNames.myselfName'))
                 }
             }
         });
@@ -192,7 +192,7 @@ WA.onInit().then(() => {
     WA.state.onVariableChange('showOldMan').subscribe((value) => {
         if (value) {
             utils.layers.toggleLayersVisibility("OldManStone", false)
-            WA.chat.sendChatMessage(utils.translations.translate('principalMap.oldMan.appearing'), ladyOfTheLakeName);
+            WA.chat.sendChatMessage(utils.translations.translate('principalMap.oldMan.appearing'), utils.translations.translate('characterNames.ladyOfTheLakeName'));
 
             utils.layers.triggerAnimationWithLayers(principalMapAnimationLayers.pouf)
         }
@@ -278,12 +278,12 @@ WA.onInit().then(() => {
     const ladyOfTheLakeRandomSentence = ['principalMap.ladyOfTheLake.randomSentence.youShallNotPass', 'principalMap.ladyOfTheLake.randomSentence.avalonIsTheKey', 'principalMap.ladyOfTheLake.randomSentence.talkToOldMan', 'principalMap.ladyOfTheLake.randomSentence.findAvalon']
     WA.room.onEnterLayer("ladyOfTheLakeZone").subscribe(() => {
         if (LadyCounter === 0) {
-            utils.chat.monologue(ladyOfTheLakeFirstTalk, ladyOfTheLakeName)
+            utils.chat.monologue(ladyOfTheLakeFirstTalk, utils.translations.translate('characterNames.ladyOfTheLakeName'))
         } else {
             WA.chat.sendChatMessage(
                 utils.translations.translate(
                     utils.main.selectRandomItemInArray(ladyOfTheLakeRandomSentence), {name: WA.player.name}
-                ), ladyOfTheLakeName
+                ), utils.translations.translate('characterNames.ladyOfTheLakeName')
             )
         }
         utils.layers.toggleLayersVisibility(principalMapLayers.ladyOfTheLake)
@@ -298,7 +298,7 @@ WA.onInit().then(() => {
     let playersInRooms = []
     const getPlayersInRooms = () => {
         if (WA.state['knowPeopleInRooms']) {
-            WA.chat.sendChatMessage(utils.translations.translate('principalMap.getPlayersInRooms.impossible'), omnipotentCharacter)
+            WA.chat.sendChatMessage(utils.translations.translate('principalMap.getPlayersInRooms.impossible'), utils.translations.translate('characterNames.omnipotentCharacter'))
         } else {
             WA.state['knowPeopleInRooms'] = true
             waitingForPLayersInRoom = true
@@ -317,7 +317,7 @@ WA.onInit().then(() => {
                     })
                     WA.chat.sendChatMessage(
                         sentence,
-                        omnipotentCharacter
+                        utils.translations.translate('characterNames.omnipotentCharacter')
                     )
                 }
 
@@ -354,7 +354,7 @@ WA.onInit().then(() => {
     const chatCommands = {
         [principalMapChatCommands.randomPlayerInMapCommand]: () => ploufPlouf('global'),
         [principalMapChatCommands.playersInRoomsCommand]: () => getPlayersInRooms(),
-        /*[principalMapChatCommands.avalonUnlockingCommand]: () => unlockAvalon(),*/
+        [principalMapChatCommands.avalonUnlockingCommand]: () => unlockAvalon(),
     }
 
     // Listening to chat commands

@@ -1,4 +1,4 @@
-const principalMapDialogs = {
+/*const principalMapDialogs = {
     oldMan: {
         actions: {
             stone: 'Admirer la statue',
@@ -60,7 +60,7 @@ const principalMapDialogs = {
         impossible: "Impossible pour le moment, une autre personne fait la même recherche",
         room: "Nombre de personne dans la salle {room} : {nombre}"
     }
-}
+}*/
 
 const graalMapDialogs = {
     riddle: [

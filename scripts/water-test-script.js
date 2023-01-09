@@ -1,7 +1,7 @@
 import { principalMapAnimationLayers } from './constants/maps-animation-layers.js'
 import { waterTestRuleName } from './constants/character-names.js';
 import { waterTestRules } from './constants/maps-game-rules.js';
-import { monologue } from "./utils.js";
+import * as utils from './utils/index.js'
 
 const getTileCoordinate = (playerPosition)=> {
     return {
@@ -12,9 +12,11 @@ const getTileCoordinate = (playerPosition)=> {
 let triggerTuto;
 WA.room.onEnterLayer('tuto').subscribe(() => {
     triggerTuto = WA.ui.displayActionMessage({
-        message: "[ESPACE] Voir les règles" ,
+        message: utils.translations.translate('utils.executeAction', {
+            action: utils.translations.translate('utils.seeTheRules')
+        }),
         callback: () => {
-            monologue(waterTestRules, waterTestRuleName)
+            utils.chat.monologue(waterTestRules, utils.translations.translate('characterNames.waterTestRuleName'))
         }
     });
 })
@@ -124,7 +126,7 @@ WA.room.onEnterLayer('goodZone2').subscribe( async()=> {
 let endMessage
 WA.room.onEnterLayer('exitText').subscribe(() => {
     endMessage = WA.ui.displayActionMessage({
-        message: "Il va falloir remonter à la surface et regagner la terre ferme maintenant... Oh? Une echelle menant à un bateau? Quelle aubaine!",
+        message: utils.translations.translate('waterTest.exitSentence'),
     })
 })
 

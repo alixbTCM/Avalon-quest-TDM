@@ -1,5 +1,6 @@
 export default {
     executeAction: '[Espace] {action}',
     shoot: 'Tirer',
-    see: 'Consulter'
+    see: 'Consulter',
+    seeTheRules: 'Voir les règles'
 }

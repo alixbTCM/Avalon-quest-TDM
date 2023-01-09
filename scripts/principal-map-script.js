@@ -5,6 +5,7 @@ import { oldManName, ladyOfTheLakeName, myselfName, omnipotentCharacter} from '.
 import { principalMapAnimationLayers } from './constants/maps-animation-layers.js'
 import { principalMapChatCommands } from './constants/chat-commands.js'
 
+// TODO : Use chat utils for messages to all players
 WA.onInit().then(() => {
     // Initiate chat
     utils.chat.initChat()
@@ -42,36 +43,15 @@ WA.onInit().then(() => {
     let roomId = null
     for (let i = 0; i < mapRoomsKeys.length; i++) {
         WA.room.onEnterLayer(mapRoomsKeys[i]).subscribe(() => {
+            utils.chat.setPlayerChatRoomId(mapRooms[mapRoomsKeys[i]].id)
             roomId = mapRooms[mapRoomsKeys[i]].id
         })
 
         WA.room.onLeaveLayer(mapRoomsKeys[i]).subscribe(() => {
+            utils.chat.setPlayerChatRoomId(null)
             roomId = null
         })
     }
-
-
-    // Send chat message to all players in map
-    WA.state['receiveChatMessage'] = false
-    const sendMessageToAllPlayers = (message, author, roomId= null) => {
-        WA.state['chatMessageContent'] = message
-        WA.state['chatMessageAuthor'] = author
-        WA.state['chatMessageRoom'] = roomId // Receive only in a certain room
-        WA.state['receiveChatMessage'] = true
-
-        setTimeout(() => {
-            WA.state['receiveChatMessage'] = false
-        }, 100)
-    }
-
-    // Ecouter le nouveau message
-    WA.state.onVariableChange('receiveChatMessage').subscribe((value) => {
-        if (value) {
-            if (WA.state['chatMessageRoom'] === null || WA.state['chatMessageRoom'] === roomId) {
-                WA.chat.sendChatMessage(WA.state['chatMessageContent'], WA.state['chatMessageAuthor'])
-            }
-        }
-    })
 
     let randomPlayersList = []
     let waitingForPloufPlouf = false
@@ -79,7 +59,7 @@ WA.onInit().then(() => {
     const ploufPlouf = (dialog, roomId = null) => {
         randomPlayersList = [] // Reset players list
         waitingForPloufPlouf = true
-        sendMessageToAllPlayers(
+        utils.chat.sendMessageToAllPlayers(
             utils.translations.translate(`principalMap.ploufPlouf.${dialog}.sentence`),
             omnipotentCharacter,
             roomId
@@ -90,7 +70,7 @@ WA.onInit().then(() => {
             randomPlayersList.push(WA.player.name)
             WA.state['roomId'] = null
             WA.state['selectRandomPlayer'] = false
-            sendMessageToAllPlayers(
+            utils.chat.sendMessageToAllPlayers(
                 utils.translations.translate(
                     `principalMap.ploufPlouf.${dialog}.selected`,
                     {name: utils.main.selectRandomItemInArray(randomPlayersList)}

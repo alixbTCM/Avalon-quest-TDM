@@ -12,19 +12,7 @@ const initChat = () => {
         }
     );
 
-
-    // Send chat message to all players in map
     WA.state['receiveChatMessage'] = false
-    const sendMessageToAllPlayers = (message, author, roomId= null) => {
-        WA.state['chatMessageContent'] = message
-        WA.state['chatMessageAuthor'] = author
-        WA.state['chatMessageRoom'] = roomId // Receive only in a certain room
-        WA.state['receiveChatMessage'] = true
-
-        setTimeout(() => {
-            WA.state['receiveChatMessage'] = false
-        }, 100)
-    }
 
     // Ecouter le nouveau message
     WA.state.onVariableChange('receiveChatMessage').subscribe((value) => {
@@ -36,6 +24,17 @@ const initChat = () => {
     })
 }
 
+// Send chat message to all players in map
+const sendMessageToAllPlayers = (message, author, roomId= null) => {
+    WA.state['chatMessageContent'] = message
+    WA.state['chatMessageAuthor'] = author
+    WA.state['chatMessageRoom'] = roomId // Receive only in a certain room
+    WA.state['receiveChatMessage'] = true
+
+    setTimeout(() => {
+        WA.state['receiveChatMessage'] = false
+    }, 100)
+}
 
 // Changer le room id d'un player
 const setPlayerChatRoomId = (id = null) => {
@@ -59,5 +58,6 @@ const monologue = (translationKeys, author, variables = {}) => {
 export {
     initChat,
     setPlayerChatRoomId,
+    sendMessageToAllPlayers,
     monologue,
 }

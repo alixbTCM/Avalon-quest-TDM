@@ -77,7 +77,7 @@ export default {
   },
   pannels: {
     toParis: "To Paris",
-    radditHole: "Rabbit hole",
+    rabbitHole: "Rabbit hole",
     throneRoom: "Throne Room",
     chatCommands: "Chat commands : {commands}"
   }

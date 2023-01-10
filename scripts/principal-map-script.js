@@ -1,7 +1,6 @@
 import { } from "https://unpkg.com/@workadventure/scripting-api-extra@^1";
 import * as utils from './utils/index.js'
 import { principalMapLayers } from './constants/maps-layers.js'
-import { oldManName, ladyOfTheLakeName, myselfName, omnipotentCharacter} from './constants/character-names.js';
 import { principalMapAnimationLayers } from './constants/maps-animation-layers.js'
 import { principalMapChatCommands } from './constants/chat-commands.js'
 
@@ -61,7 +60,7 @@ WA.onInit().then(() => {
         waitingForPloufPlouf = true
         utils.chat.sendMessageToAllPlayers(
             utils.translations.translate(`principalMap.ploufPlouf.${dialog}.sentence`),
-            omnipotentCharacter,
+            utils.translations.translate('characterNames.omnipotentCharacter'),
             roomId
         )
         WA.state['roomId'] = roomId
@@ -75,7 +74,7 @@ WA.onInit().then(() => {
                     `principalMap.ploufPlouf.${dialog}.selected`,
                     {name: utils.main.selectRandomItemInArray(randomPlayersList)}
                 ),
-                omnipotentCharacter,
+                utils.translations.translate('characterNames.omnipotentCharacter'),
                 roomId
             )
             WA.state['addNameToRandomPlayerList'] = ''

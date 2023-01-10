@@ -24,14 +24,13 @@ const racingTestRules = [
 ]
 
 const attackTestRules = [
-    'Hé ho matelot !',
-    'Tu dois maintenant prouver ta valeur en mer afin de pouvoir rejoindre la terre ferme, ah ! Ca tombe bien, voilà un navire ennemi.',
-    'Coule moi ce bateau rempli de raclûres ! Pour ça tu vas devoir utiliser le canon qui est devant toi. Les règles sont simples, tu peux faire trois actions (ton adversaire peut faire les mêmes) :',
-    '- Recharger : Il te faut des boulets à mettre dans ton canon, tu peux en charger trois maximum',
-    '- Se protéger : Te protège du tire adverse, ton navire ne prend pas de dégât',
-    '- Tirer : Tu utilises une de tes munitions et tu tires ! Si l\'adversaire ne se protège pas, il prend un dégât',
-    'Ton navire comme celui de ton adversaire peut encaisser 3 tires. Vous faîtes vos actions simultanément donc tu as le temps de réfléchir !'
-
+    'attackTest.rules.line1',
+    'attackTest.rules.line2',
+    'attackTest.rules.line3',
+    'attackTest.rules.line4',
+    'attackTest.rules.line5',
+    'attackTest.rules.line6',
+    'attackTest.rules.line7',
 ]
 
 export {

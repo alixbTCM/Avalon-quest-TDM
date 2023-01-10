@@ -17,10 +17,10 @@ const waterTestRules = [
 ]
 
 const racingTestRules = [
-    'Bienvenue dans l\'épreuve de rapidité !',
-    'Vous devez finir la course le plus rapidement possible.',
-    'Si vous n\'y arrivez pas, vous devrez recommencer pour continuer votre quête. ',
-    'Aller on se bouge les fesses !'
+    'racingTest.rules.line1',
+    'racingTest.rules.line2',
+    'racingTest.rules.line3',
+    'racingTest.rules.line4',
 ]
 
 const attackTestRules = [

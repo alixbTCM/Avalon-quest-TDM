@@ -1,5 +1,4 @@
 import { } from "https://unpkg.com/@workadventure/scripting-api-extra@^1";
-import {attackTestRuleName} from './constants/character-names.js';
 import {attackTestRules} from './constants/maps-game-rules.js';
 import * as utils from './utils/index.js'
 
@@ -387,7 +386,7 @@ WA.room.onEnterLayer('tuto').subscribe(() => {
     triggerTuto = WA.ui.displayActionMessage({
         message: utils.translations.translate('utils.executeAction', {
             action: utils.translations.translate('utils.seeTheRules')
-        }) ,
+        }),
         callback: () => {
             utils.chat.monologue(attackTestRules, utils.translations.translate('characterNames.attackTestRuleName')) // TODO : monologue translation keys
         }

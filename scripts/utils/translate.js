@@ -48,6 +48,7 @@ const translate = (translationKey, variables= {}) => {
 }
 
 export {
+    playerLanguage,
     translate,
     getSentenceWithVariables
 }

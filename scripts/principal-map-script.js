@@ -9,146 +9,6 @@ WA.onInit().then(() => {
     // Initiate chat
     utils.chat.initChat()
 
-    // Set map rooms ids
-    const mapRooms = {
-        "caverne": {
-            name: "Caverne",
-            id: "cavern"
-        },
-        "terrier-du-lapin": {
-            name: "Terrier",
-            id: "rabbitHole"
-        },
-        "champ": {
-            name: "Champs",
-            id: "field"
-        },
-        "place": {
-            name: "Place",
-            id: "place"
-        },
-        "quais": {
-            name: "Docks",
-            id:"docks",
-        },
-        "black-pearl": {
-            name: "Black Pearl",
-            id: "blackPearl"
-        }
-    }
-
-    // Set current room id for players
-    const mapRoomsKeys = Object.keys(mapRooms)
-    let roomId = null
-    for (let i = 0; i < mapRoomsKeys.length; i++) {
-        WA.room.onEnterLayer(mapRoomsKeys[i]).subscribe(() => {
-            utils.chat.setPlayerChatRoomId(mapRooms[mapRoomsKeys[i]].id)
-            roomId = mapRooms[mapRoomsKeys[i]].id
-        })
-
-        WA.room.onLeaveLayer(mapRoomsKeys[i]).subscribe(() => {
-            utils.chat.setPlayerChatRoomId(null)
-            roomId = null
-        })
-    }
-
-    let randomPlayersList = []
-    let waitingForPloufPlouf = false
-    // Fonction de plouf plouf
-    const ploufPlouf = (dialog, roomId = null) => {
-        randomPlayersList = [] // Reset players list
-        waitingForPloufPlouf = true
-        utils.chat.sendMessageToAllPlayers(
-            utils.translations.translate(`principalMap.ploufPlouf.${dialog}.sentence`),
-            utils.translations.translate('characterNames.omnipotentCharacter'),
-            roomId
-        )
-        WA.state['roomId'] = roomId
-        WA.state['selectRandomPlayer'] = true
-        setTimeout(() => {
-            randomPlayersList.push(WA.player.name)
-            WA.state['roomId'] = null
-            WA.state['selectRandomPlayer'] = false
-            utils.chat.sendMessageToAllPlayers(
-                utils.translations.translate(
-                    `principalMap.ploufPlouf.${dialog}.selected`,
-                    {name: utils.main.selectRandomItemInArray(randomPlayersList)}
-                ),
-                utils.translations.translate('characterNames.omnipotentCharacter'),
-                roomId
-            )
-            WA.state['addNameToRandomPlayerList'] = ''
-            waitingForPloufPlouf = false
-            randomPlayersList = []
-        }, 3000)
-    }
-
-
-    // Ecouter le plouf plouf
-    WA.state.onVariableChange('selectRandomPlayer').subscribe((value) => {
-        if (value && !waitingForPloufPlouf) {
-            if (WA.state['roomId'] === null || WA.state['roomId'] === roomId) {
-                WA.state['addNameToRandomPlayerList'] = WA.player.name
-            }
-        }
-    })
-
-    // Ajouter des joueurs à la variable locale randomPlayersList
-    WA.state.onVariableChange('addNameToRandomPlayerList').subscribe((value) => {
-        if (waitingForPloufPlouf && value !== '') {
-            randomPlayersList.push(value)
-        }
-    })
-
-    let triggerBoatPloufPloufMessage
-    let triggerPotatoPloufPloufMessage
-    let triggerMoneyPloufPloufMessage
-    WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufBoat').subscribe(() => {
-        triggerBoatPloufPloufMessage = WA.ui.displayActionMessage({
-            message: utils.translations.translate('utils.executeAction', {
-                action: utils.translations.translate('principalMap.ploufPlouf.boat.action')
-            }),
-            callback: () => {
-                ploufPlouf('boat', 'blackPearl')
-            }
-        })
-    })
-
-    WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufPotato').subscribe(() => {
-        triggerPotatoPloufPloufMessage = WA.ui.displayActionMessage({
-            message: utils.translations.translate('utils.executeAction', {
-                action: utils.translations.translate('principalMap.ploufPlouf.potato.action')
-            }),
-            callback: () => {
-                ploufPlouf('potato','place')
-            }
-        })
-    })
-
-    WA.room.onEnterLayer('zonesPloufPlouf/ploufPloufMoney').subscribe(() => {
-        triggerMoneyPloufPloufMessage = WA.ui.displayActionMessage({
-            message: utils.translations.translate('utils.executeAction', {
-                action: utils.translations.translate('principalMap.ploufPlouf.money.action')
-            }),
-            callback: () => {
-                ploufPlouf('money', 'docks')
-            }
-        })
-    })
-
-    WA.room.onLeaveLayer('zonesPloufPlouf/ploufPloufBoat').subscribe(() => {
-        triggerBoatPloufPloufMessage.remove()
-    })
-
-    WA.room.onLeaveLayer('zonesPloufPlouf/ploufPloufMoney').subscribe(() => {
-        triggerMoneyPloufPloufMessage.remove()
-    })
-
-    WA.room.onLeaveLayer('zonesPloufPlouf/ploufPloufPotato').subscribe(() => {
-        triggerPotatoPloufPloufMessage.remove()
-    })
-
-
     // Old man
     let oldManCounter = 0
     let triggerOldManMessage;
@@ -293,55 +153,6 @@ WA.onInit().then(() => {
         utils.layers.toggleLayersVisibility(principalMapLayers.ladyOfTheLake, false)
     })
 
-    let waitingForPLayersInRoom
-    let playersInRooms = []
-    const getPlayersInRooms = () => {
-        if (WA.state['knowPeopleInRooms']) {
-            WA.chat.sendChatMessage(utils.translations.translate('principalMap.getPlayersInRooms.impossible'), utils.translations.translate('characterNames.omnipotentCharacter'))
-        } else {
-            WA.state['knowPeopleInRooms'] = true
-            waitingForPLayersInRoom = true
-            setTimeout(() => {
-                if (roomId !== null) {
-                    playersInRooms[roomId] = playersInRooms[roomId] ? playersInRooms[roomId] + 1 : 1
-                }
-                WA.state['knowPeopleInRooms'] = false
-                WA.state['addInRoom'] = ''
-
-                for (let i = 0; i<mapRoomsKeys.length; i++) {
-                    const mapRoomIndex = mapRoomsKeys[i]
-                    const sentence = utils.translations.translate('principalMap.getPlayersInRooms.room', {
-                        room: utils.translations.translate(`principalMap.roomNames.${mapRooms[mapRoomIndex].id}`),
-                        number: (playersInRooms[mapRooms[mapRoomIndex].id] ? playersInRooms[mapRooms[mapRoomIndex].id] : 0)
-                    })
-                    WA.chat.sendChatMessage(
-                        sentence,
-                        utils.translations.translate('characterNames.omnipotentCharacter')
-                    )
-                }
-
-                waitingForPLayersInRoom = false
-                playersInRooms = []
-            }, 3000)
-        }
-    }
-
-    // Ecouter le get players in rooms
-    WA.state.onVariableChange('knowPeopleInRooms').subscribe((value) => {
-        if (value && !waitingForPLayersInRoom) {
-            if (roomId !== null) {
-                WA.state['addInRoom'] = roomId
-            }
-        }
-    })
-
-    // Ajouter des players dans playersInRooms
-    WA.state.onVariableChange('addInRoom').subscribe((value) => {
-        if (waitingForPLayersInRoom) {
-            playersInRooms[value] = playersInRooms[value] ? playersInRooms[value] + 1 : 1
-        }
-    })
-
 
     const unlockAvalon = () => {
         if (!WA.state['showOldMan']) {
@@ -358,7 +169,7 @@ WA.onInit().then(() => {
     }
 
 
-    // Commandes du chat // TODO : optimize
+    // Commandes du chat
     const chatCommands = {
         [principalMapChatCommands.uselessCommand]: () => null,
         [principalMapChatCommands.helloWorldCommand]: () => printInChat('Hello World !'),
@@ -373,6 +184,7 @@ WA.onInit().then(() => {
     // Listening to chat commands
     const chatCommandsKeys = Object.keys(chatCommands)
     WA.chat.onChatMessage((message) => {
+        console.log('chat command')
         const trimmedMessage = message.trim().toLowerCase()
         if (chatCommandsKeys.includes(trimmedMessage)) {
             const index = chatCommandsKeys[chatCommandsKeys.indexOf(trimmedMessage)]

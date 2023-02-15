@@ -76,7 +76,7 @@ export default {
     workadventure: "Workadventure"
   },
   pannels: {
-    toParis: "Vers Paris",
+    toParis: "Barque",
     rabbitHole: "Terrier du lapin",
     throneRoom: "Salle du thrône",
     chatCommands: "Commandes du chat : {commands}"

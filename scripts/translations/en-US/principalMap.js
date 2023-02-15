@@ -76,7 +76,7 @@ export default {
     workadventure: "WorkAdventure"
   },
   pannels: {
-    toParis: "To Paris",
+    toParis: "Boat",
     rabbitHole: "Rabbit hole",
     throneRoom: "Throne Room",
     chatCommands: "Chat commands : {commands}"

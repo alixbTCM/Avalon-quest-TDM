@@ -1,7 +1,7 @@
 export default {
   rules: {
     line1: 'Who DARES to enter my house?!?',
-    line2: 'SO WHAT, YOU THINK YOU\'RE DIGNITARY OF AVALON?',
+    line2: 'SO WHAT, YOU THINK YOU\'RE WORTHY OF AVALON?',
       line3: 'Let\'s see if you can get out of here alive!',
   },
   searchZones: {

@@ -395,22 +395,85 @@ WA.onInit().then(() => {
         ],
         'en-US': [
             {
-                question: 'My english question ?',
+                question: 'In "A Cristmas Carol" by Charles Dickens, how many ghosts come to visit Scrooge ?',
                 answers: {
                     a: {
-                        text: 'answer A',
+                        text: '4',
                         win: true
                     },
                     b: {
-                        text: 'answer B',
+                        text: '3',
                         win: false
                     },
                     c: {
-                        text: 'answer C',
+                        text: '6',
                         win: false
                     },
                     d: {
-                        text: 'answer D',
+                        text: '2',
+                        win: false
+                    }
+                }
+            },
+            {
+                question: 'Who wrote "Wuthering Heights" ?',
+                answers: {
+                    a: {
+                        text: 'Emily Brontë',
+                        win: true
+                    },
+                    b: {
+                        text: 'Charlotte Brontë',
+                        win: false
+                    },
+                    c: {
+                        text: 'Jane Austen',
+                        win: false
+                    },
+                    d: {
+                        text: 'J. K. Rowling',
+                        win: false
+                    }
+                }
+            },
+            {
+                question: 'In "The big bang theory", what is the first name of Leonard\'s roommate?',
+                answers: {
+                    a: {
+                        text: 'Howard',
+                        win: false
+                    },
+                    b: {
+                        text: 'Sheldon',
+                        win: true
+                    },
+                    c: {
+                        text: 'Stuart',
+                        win: false
+                    },
+                    d: {
+                        text: 'Rajesh',
+                        win: false
+                    }
+                }
+            },
+            {
+                question: 'Who is Luke Skywalker\'s father ?',
+                answers: {
+                    a: {
+                        text: 'Chewbacca',
+                        win: false
+                    },
+                    b: {
+                        text: 'Han Solo',
+                        win: false
+                    },
+                    c: {
+                        text: 'Darth Vader',
+                        win: true
+                    },
+                    d: {
+                        text: 'Yoda',
                         win: false
                     }
                 }

@@ -161,7 +161,6 @@ WA.onInit().then(() => {
     }
 
     const printInChat = (toPrint) => {
-        console.log('COUCOU', toPrint)
         WA.chat.sendChatMessage(
           toPrint,
           utils.translations.translate('characterNames.omnipotentCharacter')
@@ -184,7 +183,6 @@ WA.onInit().then(() => {
     // Listening to chat commands
     const chatCommandsKeys = Object.keys(chatCommands)
     WA.chat.onChatMessage((message) => {
-        console.log('chat command')
         const trimmedMessage = message.trim().toLowerCase()
         if (chatCommandsKeys.includes(trimmedMessage)) {
             const index = chatCommandsKeys[chatCommandsKeys.indexOf(trimmedMessage)]

@@ -349,11 +349,25 @@ WA.onInit().then(() => {
         }
     }
 
+    const printInChat = (toPrint) => {
+        console.log('COUCOU', toPrint)
+        WA.chat.sendChatMessage(
+          toPrint,
+          utils.translations.translate('characterNames.omnipotentCharacter')
+        )
+    }
+
+
     // Commandes du chat // TODO : optimize
     const chatCommands = {
-        [principalMapChatCommands.randomPlayerInMapCommand]: () => ploufPlouf('global'),
-        [principalMapChatCommands.playersInRoomsCommand]: () => getPlayersInRooms(),
+        [principalMapChatCommands.uselessCommand]: () => null,
+        [principalMapChatCommands.helloWorldCommand]: () => printInChat('Hello World !'),
+        [principalMapChatCommands.printCatCommand]: () => printInChat('Cat'),
+        [principalMapChatCommands.printDogCommand]: () => printInChat('Dog'),
+        [principalMapChatCommands.printDuckCommand]: () => printInChat('Duck'),
         [principalMapChatCommands.avalonUnlockingCommand]: () => unlockAvalon(),
+        [principalMapChatCommands.basicMathCommand]: () => printInChat('2 + 2 = 4'),
+        [principalMapChatCommands.meaningOflifeCommand]: () => printInChat('42'),
     }
 
     // Listening to chat commands

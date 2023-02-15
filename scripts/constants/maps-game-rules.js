@@ -6,9 +6,9 @@ const graalMapGameRules = [
 ]
 
 const escapeMapeGameRules = [
-    'Qui OSE pénétrer en ma demeure ?!?',
-    'ALORS COMME ÇA, VOUS VOUS PENSEZ DIGNE D\'AVALON ?',
-    'Voyons déjà si vous parvenez à sortir d\'ici vivants !',
+    'escape.rules.line1',
+    'escape.rules.line2',
+    'escape.rules.line3',
 ]
 
 const waterTestRules = [

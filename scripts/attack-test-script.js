@@ -1,7 +1,6 @@
 import { } from "https://unpkg.com/@workadventure/scripting-api-extra@^1";
-import {attackTestRuleName} from './constants/character-names.js';
 import {attackTestRules} from './constants/maps-game-rules.js';
-import {wait, monologue, toggleLayersVisibility} from "./utils.js";
+import * as utils from './utils/index.js'
 
 let me = {
     hearth: 3,
@@ -113,7 +112,7 @@ const displayShield = (player) => {
             layer: 'shield'
         },
     ]);
-    wait(1500).then(r => {
+    utils.main.wait(1500).then(r => {
             WA.room.setTiles([
                 {
                     x: player === 'me' ? 7 : 10,
@@ -168,28 +167,20 @@ const resetGame = () => {
     endGame = false
 }
 
-const oldresetGame = () => {
-    if(window.location.href.indexOf("attack-test-reset.json") === -1){
-        WA.nav.goToRoom('./attack-test.json')
-    }else{
-        WA.nav.goToRoom('./attack-test-reset.json')
-    }
-}
-
 const enemyAttack = (playerAction) => {
     enemy.action = 'attack'
     enemy.canonBall --
     removeCanonBall(enemy.canonBallPosition[enemy.canonBall +1], 'enemy')
-    toggleLayersVisibility('bangEnemy', true)
+    utils.layers.toggleLayersVisibility('bangEnemy', true)
     setTimeout(()=> {
-        toggleLayersVisibility('bangEnemy', false)
+        utils.layers.toggleLayersVisibility('bangEnemy', false)
     }, 500)
     if(playerAction !== 'protect'){
         me.hearth --
         removeHearth(me.hearthPosition[me.hearth+1], 'me')
     }
     if(sendChatComment){
-        WA.chat.sendChatMessage(`J\'attaque` , 'Enemy')
+        WA.chat.sendChatMessage(utils.translations.translate('attackTest.attack') , utils.translations.translate('attackTest.enemy'))
     }
 }
 
@@ -197,7 +188,7 @@ const enemyProtect = () => {
     enemy.action = 'protect'
     displayShield('enemy')
     if(sendChatComment) {
-        WA.chat.sendChatMessage(`Je me protège`, 'Enemy')
+        WA.chat.sendChatMessage(utils.translations.translate('attackTest.protect'), utils.translations.translate('attackTest.enemy'))
     }
 }
 
@@ -206,7 +197,7 @@ const enemyReload = () => {
     enemy.canonBall ++
     addCanonBall(enemy.canonBallPosition[enemy.canonBall], 'enemy')
     if(sendChatComment) {
-        WA.chat.sendChatMessage('Je recharge', 'Enemy')
+        WA.chat.sendChatMessage(utils.translations.translate('attackTest.reload'), utils.translations.translate('attackTest.enemy'))
     }
 }
 
@@ -261,7 +252,7 @@ const enemyAction = (playerAction)=> {
 
 const exit =  () => {
     WA.ui.displayActionMessage({
-    message: "Terre en vue ! Voulez-vous ammarer ?",
+    message: utils.translations.translate('attackTest.earthSeen'),
     callback: () => {
         mySound.stop();
         WA.nav.goToRoom('./ljdsqljds8KHID6rcSDKJHKHD8SDKHSD7.json')
@@ -272,18 +263,27 @@ const exit =  () => {
 let displayData = () => {
     if(sendChatComment){
         displayRound()
-        WA.chat.sendChatMessage(`coeur : ${enemy.hearthPosition.x}, munition : ${enemy.canonBall}`, 'Enemy')
-        WA.chat.sendChatMessage(`coeur : ${me.hearthPosition.x}, munition : ${me.canonBall}`, 'Moi')
+        WA.chat.sendChatMessage(
+            utils.translations.translate('attackTest.heartsAndMunitions', {
+                heartNumber: enemy.hearthPosition.x,
+                munitionNumber: enemy.canonBall
+            }), utils.translations.translate('attackTest.enemy'))
+        WA.chat.sendChatMessage(
+            utils.translations.translate('attackTest.heartsAndMunitions', {
+                heartNumber: me.hearthPosition.x,
+                munitionNumber: me.canonBall
+            }),
+            utils.translations.translate('attackTest.me'))
     }
     if(enemy.hearth === 0 && me.hearth === 0){
-        WA.chat.sendChatMessage('Ah en voilà une bonne ! Vos deux navires sont foutus !! Tu n\'as plus qu\'à recommencer...', 'Roi des pirates')
+        WA.chat.sendChatMessage(utils.translations.translate('attackTest.equality'), utils.translations.translate('characterNames.attackTestRuleName'))
         endGame = true
     }else if(enemy.hearth === 0 && me.hearth > 0){
-        WA.chat.sendChatMessage('Bravo Matelot ! Tu as coulé le navire ennemie !!', 'Roi des pirates')
+        WA.chat.sendChatMessage(utils.translations.translate('attackTest.win'), utils.translations.translate('characterNames.attackTestRuleName'))
         endGame = true
         exit()
     }else if(me.hearth === 0 && enemy.hearth > 0){
-        WA.chat.sendChatMessage('Mais qu\'est ce que t\'as foutu ton navire est coulé !', 'Roi des pirates')
+        WA.chat.sendChatMessage(utils.translations.translate('attackTest.loose'), utils.translations.translate('characterNames.attackTestRuleName'))
         endGame = true
     }
 }
@@ -291,7 +291,9 @@ let displayData = () => {
 let triggerProtect;
 WA.room.onEnterLayer('protectZone').subscribe(() => {
     triggerProtect = WA.ui.displayActionMessage({
-        message: endGame ? "[ESPACE] Relancer une partie" : "[ESPACE] Se protéger" ,
+        message: utils.translations.translate('utils.executeAction', {
+            action:  utils.translations.translate(endGame ? 'attackTest.reloadGame' : 'attackTest.toProtect')
+        }),
         callback: () => {
             if(endGame){
                 resetGame()
@@ -299,7 +301,7 @@ WA.room.onEnterLayer('protectZone').subscribe(() => {
                 displayShield('me')
                 enemyAction('protect')
                 if(sendChatComment) {
-                    WA.chat.sendChatMessage('Je me protège', 'Moi')
+                    WA.chat.sendChatMessage(utils.translations.translate('attackTest.protect'), utils.translations.translate('attackTest.me'))
                 }
                 displayData()
             }
@@ -313,16 +315,18 @@ WA.room.onLeaveLayer('protectZone').subscribe(() => {
 let triggerAttack;
 WA.room.onEnterLayer('attackZone').subscribe(() => {
     triggerAttack = WA.ui.displayActionMessage({
-        message: endGame ? "[ESPACE] Relancer une partie" : "[ESPACE] Attaquer !" ,
+        message: utils.translations.translate('utils.executeAction', {
+            action:  utils.translations.translate(endGame ? 'attackTest.reloadGame' : 'attackTest.toAttack')
+        }),
         callback: () => {
             if(endGame){
                 resetGame()
             }else{
                 if(me.canonBall > 0){
                     enemyAction('attack')
-                    toggleLayersVisibility('bangMe', true)
+                    utils.layers.toggleLayersVisibility('bangMe', true)
                     setTimeout(()=> {
-                        toggleLayersVisibility('bangMe', false)
+                        utils.layers.toggleLayersVisibility('bangMe', false)
                     }, 500)
                     if(enemy.action !== 'protect'){
                         enemy.hearth --
@@ -331,11 +335,11 @@ WA.room.onEnterLayer('attackZone').subscribe(() => {
                     me.canonBall --
                     removeCanonBall(me.canonBallPosition[me.canonBall +1], 'me')
                     if(sendChatComment) {
-                        WA.chat.sendChatMessage('J\'attaque', 'Moi')
+                        WA.chat.sendChatMessage(utils.translations.translate('attackTest.attack'), utils.translations.translate('attackTest.me'))
                     }
                     displayData()
                 }else{
-                    WA.chat.sendChatMessage('je n`\'ai plus de munitions !', 'Moi')
+                    WA.chat.sendChatMessage(utils.translations.translate('attackTest.noMoreMunitions'), utils.translations.translate('attackTest.me'))
                 }
             }
         }
@@ -348,7 +352,9 @@ WA.room.onLeaveLayer('attackZone').subscribe(() => {
 let triggerReload;
 WA.room.onEnterLayer('reloadZone').subscribe(() => {
     triggerReload = WA.ui.displayActionMessage({
-        message: endGame ? "[ESPACE] Relancer une partie" : "[ESPACE] Recharger" ,
+        message: utils.translations.translate('utils.executeAction', {
+            action:  utils.translations.translate(endGame ? 'attackTest.reloadGame' : 'attackTest.toReload')
+        }),
         callback: () => {
             if(endGame){
                 resetGame()
@@ -358,11 +364,11 @@ WA.room.onEnterLayer('reloadZone').subscribe(() => {
                     me.canonBall ++
                     addCanonBall(me.canonBallPosition[me.canonBall], 'me')
                     if(sendChatComment) {
-                        WA.chat.sendChatMessage('Je recharge', 'Moi')
+                        WA.chat.sendChatMessage(utils.translations.translate('attackTest.reload'), utils.translations.translate('attackTest.me'))
                     }
                     displayData()
                 }else{
-                    WA.chat.sendChatMessage('j\'ai déjà mon maximum de munition !', 'Moi')
+                    WA.chat.sendChatMessage(utils.translations.translate('attackTest.maximumMunitions'), utils.translations.translate('attackTest.me'))
                 }
             }
 
@@ -378,9 +384,11 @@ WA.room.onLeaveLayer('reloadZone').subscribe(() => {
 let triggerTuto;
 WA.room.onEnterLayer('tuto').subscribe(() => {
     triggerTuto = WA.ui.displayActionMessage({
-        message: "[ESPACE] Voir les règles" ,
+        message: utils.translations.translate('utils.executeAction', {
+            action: utils.translations.translate('utils.seeTheRules')
+        }),
         callback: () => {
-            monologue(attackTestRules, attackTestRuleName)
+            utils.chat.monologue(attackTestRules, utils.translations.translate('characterNames.attackTestRuleName')) // TODO : monologue translation keys
         }
     });
 })

@@ -1,21 +1,6 @@
-# WorkAdventure Map Starter Kit
+# Avalon quest : a game made with Workadventure
 
-This is a starter kit to help you build your own map for [WorkAdventure](https://workadventu.re).
-
-To understand how to use this starter kit, follow the tutorial at [https://workadventu.re/map-building](https://workadventu.re/map-building).
-
-![map](./map.png)
-
-## Installation
-
-With npm installed (comes with [node](https://nodejs.org/en/)), run the following commands into a terminal in the root directory of this project:
-
-```shell
-npm install
-npm run start
-```
-
-The project will run at http://localhost:8080/
+This game has been made with [WorkAdventure](https://workadventu.re).
 
 ## Licenses
 
@@ -30,3 +15,6 @@ This project contains multiple licenses:
 If you add third party assets in your map, do not forget to:
 1. Credit the author and license with the "tilesetCopyright" property present in the properties of each tilesets in the `map.json` file
 2. Add the license text in LICENSE.assets
+
+### About maps musics
+Credit for the musics

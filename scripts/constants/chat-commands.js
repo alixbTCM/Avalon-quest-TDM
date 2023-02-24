@@ -1,7 +1,12 @@
 const principalMapChatCommands = {
+    uselessCommand: "nothinghappens",
+    helloWorldCommand: "helloworld",
+    printCatCommand: "printcat",
+    printDogCommand: "printdog",
+    printDuckCommand: "printduck",
     avalonUnlockingCommand: "avalon",
-    randomPlayerInMapCommand: "ploufplouf",
-    playersInRoomsCommand: "getplayersinrooms"
+    basicMathCommand: "basicmath",
+    meaningOflifeCommand: "whatisthemeaningoflife",
 }
 
 export{

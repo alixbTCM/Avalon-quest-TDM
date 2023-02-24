@@ -1,7 +1,6 @@
 import { } from "https://unpkg.com/@workadventure/scripting-api-extra@^1";
-import {racingTestRuleName} from './constants/character-names.js';
 import {racingTestRules} from './constants/maps-game-rules.js';
-import {monologue, toggleLayersVisibility} from "./utils.js";
+import * as utils from './utils/index.js'
 
 const timeOut = 75000;
 const timeOutDate = new Date(timeOut)
@@ -18,17 +17,20 @@ WA.room.onEnterLayer('stopRacing').subscribe( async()=> {
     const msg =  new Date(WA.player.state.stopTime - WA.player.state.startTime)
 
     if(msg > timeOut){
-        WA.chat.sendChatMessage(`Bouuuuuh t\'es nul, Try Again ! Il faut que tu fasses moins de ${timeOutDate.getMinutes()+
-            "min "+timeOutDate.getSeconds()}`, "Maitre du temps")
+        WA.chat.sendChatMessage(utils.translations.translate('racingTest.time', {
+            time: timeOutDate.getMinutes()+ "min " + timeOutDate.getSeconds()
+        }), utils.translations.translate('characterNames.racingTestRuleName'))
         WA.nav.goToRoom('./ljdsqljds8KHID6rcSDKJHKHD8SDKHSD7.json');
     } else{
-        WA.chat.sendChatMessage('Oooh? BRAVO ! T\'es finalement pas si nul', "Maitre du temps")
+        WA.chat.sendChatMessage(utils.translations.translate('racingTest.win'), utils.translations.translate('characterNames.racingTestRuleName'))
     }
     const formatMsgSec = msg.getUTCHours()+
         "h "+msg.getMinutes()+
         "min "+msg.getSeconds() +
         ","+msg.getMilliseconds()+ "s";
-    WA.chat.sendChatMessage(`Tu as mis : ${formatMsgSec}`, "Maitre du temps")
+    WA.chat.sendChatMessage(utils.translations.translate('racingTest.time', {
+        time: formatMsgSec
+    }), utils.translations.translate('characterNames.racingTestRuleName'))
 })
 
 WA.room.onEnterLayer('stop').subscribe(() => {
@@ -44,9 +46,11 @@ WA.room.onEnterLayer('stop').subscribe(() => {
 let triggerTuto;
 WA.room.onEnterLayer('tuto').subscribe(() => {
     triggerTuto = WA.ui.displayActionMessage({
-        message: "[ESPACE] Voir les règles" ,
+        message: utils.translations.translate('utils.executeAction', {
+            action: utils.translations.translate('utils.seeTheRules')
+        }),
         callback: () => {
-            monologue(racingTestRules, racingTestRuleName)
+            utils.chat.monologue(racingTestRules, utils.translations.translate('characterNames.racingTestRuleName'))
         }
     });
 })
@@ -58,9 +62,9 @@ WA.room.onLeaveLayer('tuto').subscribe(() => {
 let triggerFakeEntryMessage
 WA.room.onEnterLayer('triggerFakeEntry').subscribe(() => {
     triggerFakeEntryMessage = WA.ui.displayActionMessage({
-        message: "BOUH",
+        message: utils.translations.translate('racingTest.notRightWay'),
     })
-    toggleLayersVisibility('fakeEntry')
+    utils.layers.toggleLayersVisibility('fakeEntry')
 })
 
 WA.room.onLeaveLayer('triggerFakeEntry').subscribe(() => {
@@ -70,7 +74,7 @@ WA.room.onLeaveLayer('triggerFakeEntry').subscribe(() => {
 let endMessage
 WA.room.onEnterLayer('endText').subscribe(() => {
     endMessage = WA.ui.displayActionMessage({
-        message: "*Un mystérieux miroire semble vous inciter à venir le voir...*",
+        message: utils.translations.translate('racingTest.mirror'),
     })
 })
 

@@ -17,4 +17,4 @@ If you add third party assets in your map, do not forget to:
 2. Add the license text in LICENSE.assets
 
 ### About maps musics
-Credit for the musics
+Music copyright : Spoons Record and Red Oak for all musics 

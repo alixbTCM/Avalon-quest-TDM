@@ -38,7 +38,7 @@ WA.onInit().then(() => {
         currentPopup.close()
     })
 
-    var mySound = WA.sound.loadSound("../sounds/final.mp3");
+    var mySound = WA.sound.loadSound("../sounds/Sweet Nostalgia.mp3");
     var soundConfig = {
         volume: 0.2,
         loop: true,

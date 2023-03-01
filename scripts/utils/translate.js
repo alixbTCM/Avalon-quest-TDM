@@ -1,5 +1,5 @@
-import * as translationFR from '/scripts/translations/fr-FR/index.js'
-import * as translationEN from '/scripts/translations/en-US/index.js'
+import * as translationFR from '../translations/fr-FR/index.js'
+import * as translationEN from '../translations/en-US/index.js'
 
 const acceptedPlayerLanguages = {
     'fr-FR': translationFR,

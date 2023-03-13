@@ -18,42 +18,25 @@
                     path = path.substr(path, path.length - 'index.html'.length);
                 }
                 const instanceId = Math.random().toString(36).substring(2, 15);
-                const url = `https://play.workadventu.re/_/${instanceId}/${host}${path}/maps/map.json`;
-                document.getElementById('mapLink').href = url;
-                document.getElementById('mapLink2').href = url;
-                document.getElementById('mapLink').innerText = url;
-
-                const mapUrl = window.location.protocol+'//'+window.location.host+path+'map.json';
-                document.getElementById('mapUrl').innerText = mapUrl;
-
-                const gettingStartedLink = 'https://workadventu.re/getting-started?name=Map&mapUrl='+mapUrl;
-                document.getElementById('gettingStartedLink').href = gettingStartedLink;
-
+                const mapLink2 = document.getElementById('mapLink2');
+                mapLink2.href = `https://play.workadventu.re/_/${instanceId}/${host}${path}/maps/map.json`;
             };
         </script>
     </head>
     <body>
         <div class="useful-width">
             <div style="text-align: center; margin-top: 3rem">
-                <img src="https://workadventu.re/img/logo.png" alt=""/>
-            </div>
-            <div class="nes-container with-title is-centered" style="margin-top: 3rem">
-                <p class="title">WorkAdventure map</p>
-                <p>This website contains a map for <a href="https://workadventu.re">Workadventu.re</a>.</p>
+                <img src="coverImage.png" alt="Avalon quest"/>
             </div>
 
             <div class="nes-container with-title is-centered" style="margin-top: 1rem">
-                <p class="title">Test this map</p>
-                <p>You can test this map at <a id="mapLink" href=""></a>.</p>
-                <p><a id="mapLink2" href="" class="nes-btn is-primary">Test this map</a></p>
-            </div>
-
-            <div class="nes-container with-title is-centered" style="margin-top: 1rem">
-                <p class="title">Happy with the result?</p>
-                <p>Register your room on Workadventu.re.</p>
-                <p><a id="gettingStartedLink" href="" class="nes-btn is-primary">Create a new room</a></p>
-                <p>or copy and paste the map URL in WorkAdventu.re's administration panel:</p>
-                <p><span id="mapUrl" style="color: gray" /></p>
+                <p class="title">Avalon Quest</p>
+                <p>Congratulations young knight! You are one of the few chosen to be able to try your luck at removing Excalibur from the rock.</p>
+                <p>Can you reach the sword and become the king of the legendary city of Camelot?</p>
+                <br>
+                <p><a id="mapLink2" href="" class="nes-btn is-primary">Start the adventure</a></p>
+                <br>
+                <p>NOTE : This adventure was created to be played on a computer. It is not intended for cell phones. In order to have the best experience possible, please use a computer.</p>
             </div>
         </div>
     </body>
